@@ -133,6 +133,24 @@ class LinkedList<T> {
 		this.len--;
 	}
 
+	reverseList() {
+		let currentVal = this.head;
+
+		let prevVal = null;
+
+		while (currentVal) {
+			let nextVal = currentVal.next;
+
+			currentVal.next = prevVal;
+
+			prevVal = currentVal;
+
+			currentVal = nextVal;
+		}
+
+		this.head = prevVal;
+	}
+
 	getList() {
 		let current = this.head;
 
@@ -146,22 +164,20 @@ class LinkedList<T> {
 	}
 }
 
-const node = new Link(130);
+const node = new Link(0);
 
 const list = new LinkedList(node);
 
-list.appendFirst(10);
+list.appendLast(10);
 
 list.appendLast(20);
 
-list.appendLast(90);
-
 list.appendLast(30);
 
-list.appendLast(70);
+list.appendLast(40);
 
-list.getList();
+list.appendLast(50);
 
-list.removeAt(3);
+list.reverseList();
 
 list.getList();
