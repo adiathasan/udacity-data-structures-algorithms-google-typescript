@@ -15,6 +15,7 @@ class Link<T> {
 
 class LinkedList<T> {
 	private head: Link<T> | null = null;
+
 	public len = 0;
 
 	constructor(headElm?: Link<T>) {
@@ -32,14 +33,17 @@ class LinkedList<T> {
 
 		if (this.head === null) {
 			this.head = node;
-		} else {
-			current = this.head;
-			while (current.next) {
-				current = current.next;
-			}
+			this.len++;
 
-			current.next = node;
+			return;
 		}
+
+		current = this.head;
+		while (current.next) {
+			current = current.next;
+		}
+
+		current.next = node;
 
 		this.len++;
 	}
@@ -151,6 +155,24 @@ class LinkedList<T> {
 		this.head = prevVal;
 	}
 
+	reverseTwice() {
+		let current = this.head;
+
+		let previous = null;
+
+		while (current) {
+			let next = current.next;
+
+			current.next = previous;
+
+			previous = current;
+
+			current = next;
+		}
+
+		this.head = previous;
+	}
+
 	getList() {
 		let current = this.head;
 
@@ -178,6 +200,8 @@ list.appendLast(40);
 
 list.appendLast(50);
 
-list.reverseList();
+// list.reverseList();
+
+list.reverseTwice();
 
 list.getList();
